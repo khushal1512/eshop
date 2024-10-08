@@ -1,0 +1,4 @@
+node_modules/
+uploads/
+backend/config/.env
+.DS_Store
