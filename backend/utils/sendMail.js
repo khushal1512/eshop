@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-const SendmailTransport = require("nodemailer/lib/sendmail-transport");
 
 const sendMail = async (options) => {
   const transporter = nodemailer.createTransport({
