@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 import axios from "axios";
 import { server } from "../../server";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -23,18 +25,20 @@ const Signup = () => {
     newForm.append("name", name);
     newForm.append("email", email);
     newForm.append("password", password);
-    console.log("Name:", newForm.get("name"));
-    console.log("Email:", newForm.get("email"));
-    console.log("Password:", newForm.get("password"));
+    // console.log("Name:", newForm.get("name"));
+    // console.log("Email:", newForm.get("email"));
+    // console.log("Password:", newForm.get("password"));
     axios
       .post(`${server}/user/create-user`, newForm, config)
       .then((res) => {
-        if(res.data.success === true) {
-          navigate("/");
+        if (res.data.success === true) {
+          toast.success(res.data.message);
         }
       })
       .catch((err) => {
-        console.log(err);
+        toast.err((err) => {
+          err.message;
+        });
       });
   };
 
@@ -52,7 +56,7 @@ const Signup = () => {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit} >
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
