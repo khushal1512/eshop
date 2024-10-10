@@ -105,4 +105,25 @@ router.post(
   })
 );
 
+router.get(
+  "/login-user",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+      if (!email || password) {
+        return next(new ErrorHandler("User doesn't exit", 400));
+      }
+
+      const isPasswordValid = await user.comparePasword(password);
+
+      if (!isPasswordValid) {
+        return next(new ErrorHandler("Inocrrect Password"));
+      }
+
+      sendToken(user, 201, res);
+    } catch (error) {
+      return next(new ErrorHandler(err, message, 500));
+    }
+  })
+);
 module.exports = router;
