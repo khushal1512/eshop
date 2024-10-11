@@ -12,7 +12,7 @@ const Login = () => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
 
-  onHandleSubmit = async (e) => { 
+  const onHandleSubmit = async (e) => { 
     e.preventDefault();
     await axios.post(`${server}/user/login-user`,{
       email,
