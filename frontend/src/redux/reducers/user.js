@@ -4,7 +4,7 @@ const initialState = {
   isAuthenticated: false,
 };
 
-export const useReducer = createReducer(initialState, {
+export const userReducer = createReducer(initialState, {
   LoadUserRequest: (state) => {
     state.loading = true;
   },
@@ -18,7 +18,6 @@ export const useReducer = createReducer(initialState, {
     state.error = action.payload;
     state.isAuthenticated = false;
   },
-
   clearError: (state) => {
     state.error = null;
   },
